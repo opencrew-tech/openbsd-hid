@@ -1,0 +1,32 @@
+Index: hid/__init__.py
+--- hid/__init__.py.orig
++++ hid/__init__.py
+@@ -8,6 +8,8 @@ __all__ = ['HIDException', 'DeviceInfo', 'Device', 'en
+ 
+ hidapi = None
+ library_paths = (
++    'libhidapi.so',
++    'libhidapi-openbsd.so',
+     'libhidapi-hidraw.so',
+     'libhidapi-hidraw.so.0',
+     'libhidapi-libusb.so',
+@@ -31,7 +33,7 @@ else:
+     raise ImportError(error)
+ 
+ 
+-hidapi.hid_init()
++hidapi.hidapi_hid_init()
+ atexit.register(hidapi.hid_exit)
+ 
+ 
+@@ -104,8 +106,8 @@ DeviceInfo._fields_ = [
+     ('next', ctypes.POINTER(DeviceInfo)),
+ ] + bus_type
+ 
+-hidapi.hid_init.argtypes = []
+-hidapi.hid_init.restype = ctypes.c_int
++hidapi.hidapi_hid_init.argtypes = []
++hidapi.hidapi_hid_init.restype = ctypes.c_int
+ hidapi.hid_exit.argtypes = []
+ hidapi.hid_exit.restype = ctypes.c_int
+ hidapi.hid_enumerate.argtypes = [ctypes.c_ushort, ctypes.c_ushort]

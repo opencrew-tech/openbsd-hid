@@ -1,0 +1,18 @@
+Index: Audio/AudioManager.cpp
+--- Audio/AudioManager.cpp.orig
++++ Audio/AudioManager.cpp
+@@ -265,6 +265,14 @@ void AudioManager::InitAudioDeviceList()
+     | If using OpenAL, start OpenAL capture on default capture device  |
+     \*----------------------------------------------------------------*/
+ 
++    if (getenv("OPENRGB_AUDIORECDEVICE") == NULL) {
++        if (putenv((char*)"AUDIORECDEVICE=snd/mon"))
++            printf("[OpenRGBEffectsPlugin] putenv failed : %s\n",
++              strerror(errno));
++    } else if (setenv("AUDIORECDEVICE", getenv("OPENRGB_AUDIORECDEVICE"), 1))
++        printf("[OpenRGBEffectsPlugin] setenv failed : %s\n",
++          strerror(errno));
++
+     ALCchar* devices;
+     devices = (ALCchar *) alcGetString(NULL, ALC_CAPTURE_DEVICE_SPECIFIER);
+ 

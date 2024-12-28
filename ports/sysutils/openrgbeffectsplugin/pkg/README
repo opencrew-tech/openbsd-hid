@@ -1,0 +1,15 @@
++-------------------------------------------------------------------------------
+| Running ${PKGSTEM} on OpenBSD
++-------------------------------------------------------------------------------
+
+Audio effects
+=============
+
+${PKGSTEM} is patched to use 'snd/mon' device in order to capture audio output.
+
+See https://www.openbsd.org/faq/faq13.html#recordmon and sndiod(8) :
+# rcctl set sndiod flags -s default -m play,mon -s mon
+# rcctl restart sndiod
+
+Alternatively, you can configure it with 'OPENRGB_AUDIORECDEVICE' env :
+$ OPENRGB_AUDIORECDEVICE=snd/mymon openrgb

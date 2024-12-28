@@ -1,0 +1,4 @@
+openrgb/
+openrgb/plugins/
+@lib openrgb/plugins/libOpenRGBEffectsPlugin.so.${LIBOpenRGBEffectsPlugin_VERSION}
+share/doc/pkg-readmes/${PKGSTEM}

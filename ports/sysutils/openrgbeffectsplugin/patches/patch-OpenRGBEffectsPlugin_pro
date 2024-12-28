@@ -1,0 +1,44 @@
+Index: OpenRGBEffectsPlugin.pro
+--- OpenRGBEffectsPlugin.pro.orig
++++ OpenRGBEffectsPlugin.pro
+@@ -11,10 +11,10 @@ PLUGIN_VERSION     = 0.9
+ # Automatically generated build information                                                     #
+ #-----------------------------------------------------------------------------------------------#
+ win32:BUILDDATE = $$system(date /t)
+-unix:BUILDDATE  = $$system(date -R -d "@${SOURCE_DATE_EPOCH:-$(date +%s)}")
+-GIT_COMMIT_ID   = $$system(git --git-dir $$_PRO_FILE_PWD_/.git --work-tree $$_PRO_FILE_PWD_ rev-parse HEAD)
+-GIT_COMMIT_DATE = $$system(git --git-dir $$_PRO_FILE_PWD_/.git --work-tree $$_PRO_FILE_PWD_ show -s --format=%ci HEAD)
+-GIT_BRANCH      = $$system(git --git-dir $$_PRO_FILE_PWD_/.git --work-tree $$_PRO_FILE_PWD_ rev-parse --abbrev-ref HEAD)
++unix:BUILDDATE  = $$system(date)
++GIT_COMMIT_ID   = ${ID}
++GIT_COMMIT_DATE = ${DATE}
++GIT_BRANCH      = "master"
+ 
+ #-----------------------------------------------------------------------------------------------#
+ # Download links                                                                                #
+@@ -471,13 +471,24 @@ win32:DEFINES +=                                      
+     _WINSOCK_DEPRECATED_NO_WARNINGS                                     \
+     WIN32_LEAN_AND_MEAN                                                 \
+ 
++
+ #-----------------------------------------------------------------------#
+ # Linux-specific Configuration                                          #
+ #-----------------------------------------------------------------------#
+-unix:!macx {
++unix:!macx:!openbsd: {
+     LIBS += -lopenal
+     QMAKE_CXXFLAGS += -std=c++17
+     target.path=$$PREFIX/lib/
++    INSTALLS += target
++}
++
++#-----------------------------------------------------------------------#
++# OpenBSD-specific Configuration                                        #
++#-----------------------------------------------------------------------#
++openbsd: {
++    LIBS += -lopenal
++    QMAKE_CXXFLAGS += -std=c++17
++    target.path=$$PREFIX/openrgb/plugins
+     INSTALLS += target
+ }
+ 

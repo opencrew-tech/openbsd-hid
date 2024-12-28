@@ -19,6 +19,9 @@ PERMIT_PACKAGE=	Yes
 WANTLIB += ${COMPILER_LIBCXX} GL Qt5Core Qt5Gui Qt5Widgets c hidapi-openbsd
 WANTLIB += m mbedcrypto mbedtls mbedx509 usb-1.0
 
+FIX_CRLF_FILES= \
+	Controllers/CorsairHydroController/CorsairHydroControllerDetect.cpp
+
 COMPILER=	base-clang ports-gcc base-gcc
 
 MODULES=	devel/qmake \

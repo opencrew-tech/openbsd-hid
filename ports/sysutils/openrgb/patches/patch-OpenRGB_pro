@@ -16,7 +16,7 @@ Index: OpenRGB.pro
  
  DEFINES +=                                                                                      \
      VERSION_STRING=\\"\"\"$$VERSION\\"\"\"                                                      \
-@@ -1970,6 +1970,71 @@ contains(QMAKE_PLATFORM, freebsd) {
+@@ -1970,6 +1970,72 @@ contains(QMAKE_PLATFORM, freebsd) {
      rules.path=$$PREFIX/lib/udev/rules.d/
      rules.files+=60-openrgb.rules
      INSTALLS += target desktop icon metainfo rules
@@ -50,6 +50,7 @@ Index: OpenRGB.pro
 +    -lhidapi-openbsd                                                                            \
 +
 +    DEFINES += USE_HID_USAGE
++    DEFINES += OPENRGB_EXTRA_PLUGIN_DIRECTORY=\\"\"\"$$PREFIX/openrgb/plugins\\"\"\"
 +
 +    COMPILER_VERSION = $$system($$QMAKE_CXX " -dumpversion")
 +    if (!versionAtLeast(COMPILER_VERSION, "9")) {

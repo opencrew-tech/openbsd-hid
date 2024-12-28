@@ -40,5 +40,6 @@ WRKDIST=	${WRKDIR}/OpenRGB-release_${V}-${ID}
 SUBST_VARS+=	ID DATE
 post-patch:
 	${SUBST_CMD} ${WRKSRC}/OpenRGB.pro
+	${SUBST_CMD} ${WRKSRC}/AutoStart/AutoStart-Linux.cpp
 
 .include <bsd.port.mk>

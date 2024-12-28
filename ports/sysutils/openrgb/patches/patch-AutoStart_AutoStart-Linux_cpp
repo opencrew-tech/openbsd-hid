@@ -1,0 +1,32 @@
+Index: AutoStart/AutoStart-Linux.cpp
+--- AutoStart/AutoStart-Linux.cpp.orig
++++ AutoStart/AutoStart-Linux.cpp
+@@ -5,7 +5,12 @@
+ #include <fstream>
+ #include <iostream>
+ #include <unistd.h>
++#ifdef __OpenBSD__
++#include <limits.h>
++#include <sstream>
++#else
+ #include <linux/limits.h>
++#endif
+ 
+ /*-----------------------------------------------------*\
+ | Linux AutoStart Implementation                        |
+@@ -118,11 +123,15 @@ std::string AutoStart::GetExePath()
+     /*-------------------------------------------------*\
+     | Create the OpenRGB executable path                |
+     \*-------------------------------------------------*/
++#ifdef __OpenBSD__
++    return(std::string("${LOCALBASE}/bin/openrgb", sizeof("${LOCALBASE}/bin/openrgb")));
++#else
+     char exepath[ PATH_MAX ];
+ 
+     ssize_t count = readlink("/proc/self/exe", exepath, PATH_MAX);
+     
+     return(std::string(exepath, (count > 0) ? count : 0));
++#endif
+ }
+ 
+ /*-----------------------------------------------------*\

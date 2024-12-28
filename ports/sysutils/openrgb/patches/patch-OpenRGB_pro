@@ -35,7 +35,7 @@ Index: OpenRGB.pro
 +    /usr/local/include/libusb-1.0                                                               \
 +
 +    HEADERS +=                                                                                  \
-+    AutoStart/AutoStart-OpenBSD.h                                                               \
++    AutoStart/AutoStart-Linux.h                                                                 \
 +    Controllers/ENESMBusController/ENESMBusInterface/ENESMBusInterface_SpectrixS40G.h           \
 +    Controllers/FaustusController/RGBController_Faustus.h                                       \
 +    Controllers/LinuxLEDController/LinuxLEDController.h                                         \
@@ -59,7 +59,7 @@ Index: OpenRGB.pro
 +    SOURCES +=                                                                                  \
 +    dependencies/hueplusplus-1.0.0/src/LinHttpHandler.cpp                                       \
 +    serial_port/find_usb_serial_port_linux.cpp                                                  \
-+    AutoStart/AutoStart-OpenBSD.cpp                                                             \
++    AutoStart/AutoStart-Linux.cpp                                                               \
 +    Controllers/ENESMBusController/XPGSpectrixS40GDetect.cpp                                    \
 +    Controllers/ENESMBusController/ENESMBusInterface/ENESMBusInterface_SpectrixS40G.cpp         \
 +    Controllers/FaustusController/RGBController_Faustus.cpp                                     \

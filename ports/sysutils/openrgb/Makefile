@@ -11,7 +11,7 @@ CATEGORIES=	sysutils
 
 HOMEPAGE=	https://openrgb.org/
 
-MAINTAINER=	fabien@openbsd.org
+MAINTAINER=	Fabien Romano <fabien@openbsd.org>
 
 #GPLv2
 PERMIT_PACKAGE=	Yes
@@ -19,20 +19,20 @@ PERMIT_PACKAGE=	Yes
 WANTLIB += ${COMPILER_LIBCXX} GL Qt5Core Qt5Gui Qt5Widgets c hidapi-openbsd
 WANTLIB += m mbedcrypto mbedtls mbedx509 usb-1.0
 
-COMPILER=		base-clang ports-gcc base-gcc
+COMPILER=	base-clang ports-gcc base-gcc
 
-MODULES=		devel/qmake \
-			x11/qt5
+MODULES=	devel/qmake \
+		x11/qt5
 
-RUN_DEPENDS=		devel/desktop-file-utils \
-			x11/gtk+4,-guic
-LIB_DEPENDS=		comms/libhidapi \
-			devel/libusb1 \
-			security/polarssl
+RUN_DEPENDS=	devel/desktop-file-utils \
+		x11/gtk+4,-guic
+LIB_DEPENDS=	comms/libhidapi \
+		devel/libusb1 \
+		security/polarssl
 
-NO_TEST=Yes
+NO_TEST=	Yes
 
-WRKDIST=		${WRKDIR}/OpenRGB-release_${V}-${ID}
+WRKDIST=	${WRKDIR}/OpenRGB-release_${V}-${ID}
 
 SUBST_VARS+=	ID DATE
 post-patch:

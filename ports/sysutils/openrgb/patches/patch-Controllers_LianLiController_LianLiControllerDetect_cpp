@@ -1,0 +1,12 @@
+Index: Controllers/LianLiController/LianLiControllerDetect.cpp
+--- Controllers/LianLiController/LianLiControllerDetect.cpp.orig
++++ Controllers/LianLiController/LianLiControllerDetect.cpp
+@@ -13,7 +13,7 @@
+ #include "Detector.h"
+ #include "ResourceManager.h"
+ 
+-#ifdef __FreeBSD__
++#if defined(__FreeBSD__) || defined(__OpenBSD__)
+ #include <libusb.h>
+ #else
+ #include <libusb-1.0/libusb.h>

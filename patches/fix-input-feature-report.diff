@@ -1,0 +1,28 @@
+Fix uhidev_set_report handling for input and feature reports.
+
+Ensure that the output pipe is only used for output reports.
+
+Index: sys/dev/usb/uhidev.c
+===================================================================
+RCS file: /cvs/src/sys/dev/usb/uhidev.c,v
+diff -u -p -u -p -r1.110 uhidev.c
+--- sys/dev/usb/uhidev.c	23 May 2024 03:21:09 -0000	1.110
++++ sys/dev/usb/uhidev.c	28 Dec 2024 17:03:10 -0000
+@@ -761,7 +761,7 @@ uhidev_set_report(struct uhidev_softc *s
+ 		memcpy(buf + 1, data, len - 1);
+ 	}
+ 
+-	if (sc->sc_opipe != NULL) {
++	if (sc->sc_opipe != NULL && type == UHID_OUTPUT_REPORT) {
+ 		usbd_setup_xfer(sc->sc_owxfer, sc->sc_opipe, 0, buf, len,
+ 		    USBD_SYNCHRONOUS | USBD_CATCH, 0, NULL);
+ 		if (usbd_transfer(sc->sc_owxfer)) {
+@@ -825,7 +825,7 @@ uhidev_set_report_async(struct uhidev_so
+ 		memcpy(buf, data, len);
+ 	}
+ 
+-	if (sc->sc_opipe != NULL) {
++	if (sc->sc_opipe != NULL && type == UHID_OUTPUT_REPORT) {
+ 		usbd_setup_xfer(xfer, sc->sc_opipe, sc, buf, len,
+ 		    USBD_NO_COPY, USBD_DEFAULT_TIMEOUT,
+ 		    uhidev_set_report_async_cb);

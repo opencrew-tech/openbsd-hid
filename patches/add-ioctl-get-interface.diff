@@ -1,0 +1,36 @@
+Add new ioctl to retrieve the USB interface of a uhid device.
+
+Currently, there is no mechanism to distinguish if a USB device 
+has the same HID descriptor on multiple interfaces.
+It is also required by libhidapi.
+
+Index: sys/dev/usb/uhidev.c
+===================================================================
+RCS file: /cvs/src/sys/dev/usb/uhidev.c,v
+diff -u -p -u -p -r1.110 uhidev.c
+--- sys/dev/usb/uhidev.c	23 May 2024 03:21:09 -0000	1.110
++++ sys/dev/usb/uhidev.c	28 Dec 2024 17:03:10 -0000
+@@ -1040,6 +1040,9 @@ uhidev_ioctl(struct uhidev *sc, u_long c
+ 		break;
+ 	case USB_GET_REPORT_ID:
+ 		*(int *)addr = sc->sc_report_id;
++		break;
++	case USB_GET_INTERFACE_ID:
++		*(int *)addr = sc->sc_parent->sc_ifaceno;
+ 		break;
+ 	default:
+ 		return -1;
+Index: sys/dev/usb/usb.h
+===================================================================
+RCS file: /cvs/src/sys/dev/usb/usb.h,v
+diff -u -p -u -p -r1.63 usb.h
+--- sys/dev/usb/usb.h	23 May 2024 03:21:09 -0000	1.63
++++ sys/dev/usb/usb.h	28 Dec 2024 17:03:10 -0000
+@@ -767,6 +767,7 @@ struct usb_device_stats {
+ #define USB_GET_REPORT		_IOWR('U', 23, struct usb_ctl_report)
+ #define USB_SET_REPORT		_IOW ('U', 24, struct usb_ctl_report)
+ #define USB_GET_REPORT_ID	_IOR ('U', 25, int)
++#define USB_GET_INTERFACE_ID	_IOR ('U', 26, int)
+ 
+ /* Generic USB device */
+ #define USB_GET_CONFIG		_IOR ('U', 100, int)

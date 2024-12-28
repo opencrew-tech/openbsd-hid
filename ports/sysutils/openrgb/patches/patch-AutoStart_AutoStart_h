@@ -1,0 +1,11 @@
+Index: AutoStart/AutoStart.h
+--- AutoStart/AutoStart.h.orig
++++ AutoStart/AutoStart.h
+@@ -42,3 +42,7 @@ class AutoStartInterface (protected)
+ #ifdef __FreeBSD__
+ #include "AutoStart-FreeBSD.h"
+ #endif
++
++#ifdef __OpenBSD__
++#include "AutoStart-OpenBSD.h"
++#endif

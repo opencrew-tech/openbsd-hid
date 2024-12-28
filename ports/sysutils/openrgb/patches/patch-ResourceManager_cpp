@@ -1,0 +1,39 @@
+Index: ResourceManager.cpp
+--- ResourceManager.cpp.orig
++++ ResourceManager.cpp
+@@ -843,7 +843,7 @@ void ResourceManager::DetectDevicesThreadFunction()
+     /*-------------------------------------------------*\
+     | Initialize HID interface for detection            |
+     \*-------------------------------------------------*/
+-    int hid_status = hid_init();
++    int hid_status = hidapi_hid_init();
+ 
+     LOG_INFO("Initializing HID interfaces: %s", ((hid_status == 0) ? "Success" : "Failed"));
+ 
+@@ -1067,8 +1078,6 @@ void ResourceManager::DetectDevicesThreadFunction()
+                   || (     hid_device_detectors[hid_detector_idx].usage_page == current_hid_device->usage_page       ) )
+                 && ( (     hid_device_detectors[hid_detector_idx].usage      == HID_USAGE_ANY                        )
+                   || (     hid_device_detectors[hid_detector_idx].usage      == current_hid_device->usage            ) )
+-                && ( (     hid_device_detectors[hid_detector_idx].interface  == HID_INTERFACE_ANY                    )
+-                  || (     hid_device_detectors[hid_detector_idx].interface  == current_hid_device->interface_number ) )
+ #else
+                 && ( (     hid_device_detectors[hid_detector_idx].interface  == HID_INTERFACE_ANY                    )
+                   || (     hid_device_detectors[hid_detector_idx].interface  == current_hid_device->interface_number ) )
+@@ -1138,8 +1147,6 @@ void ResourceManager::DetectDevicesThreadFunction()
+                   || (     hid_device_detectors[hid_detector_idx].usage_page == current_hid_device->usage_page       ) )
+                 && ( (     hid_device_detectors[hid_detector_idx].usage      == HID_USAGE_ANY                        )
+                   || (     hid_device_detectors[hid_detector_idx].usage      == current_hid_device->usage            ) )
+-                && ( (     hid_device_detectors[hid_detector_idx].interface  == HID_INTERFACE_ANY                    )
+-                  || (     hid_device_detectors[hid_detector_idx].interface  == current_hid_device->interface_number ) )
+ #else
+                 && ( (     hid_device_detectors[hid_detector_idx].interface  == HID_INTERFACE_ANY                    )
+                   || (     hid_device_detectors[hid_detector_idx].interface  == current_hid_device->interface_number ) )
+@@ -1181,8 +1188,6 @@ void ResourceManager::DetectDevicesThreadFunction()
+                   || (     hid_wrapped_device_detectors[hid_detector_idx].usage_page == current_hid_device->usage_page       ) )
+                 && ( (     hid_wrapped_device_detectors[hid_detector_idx].usage      == HID_USAGE_ANY                        )
+                   || (     hid_wrapped_device_detectors[hid_detector_idx].usage      == current_hid_device->usage            ) )
+-                && ( (     hid_wrapped_device_detectors[hid_detector_idx].interface  == HID_INTERFACE_ANY                    )
+-                  || (     hid_wrapped_device_detectors[hid_detector_idx].interface  == current_hid_device->interface_number ) )
+ #else
+                 && ( (     hid_wrapped_device_detectors[hid_detector_idx].interface  == HID_INTERFACE_ANY                    )
+                   || (     hid_wrapped_device_detectors[hid_detector_idx].interface  == current_hid_device->interface_number ) )

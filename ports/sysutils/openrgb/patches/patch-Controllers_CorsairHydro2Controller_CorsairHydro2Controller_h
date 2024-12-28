@@ -1,0 +1,12 @@
+Index: Controllers/CorsairHydro2Controller/CorsairHydro2Controller.h
+--- Controllers/CorsairHydro2Controller/CorsairHydro2Controller.h.orig
++++ Controllers/CorsairHydro2Controller/CorsairHydro2Controller.h
+@@ -8,7 +8,7 @@
+ 
+ #include "RGBController.h"
+ #include <vector>
+-#ifdef __FreeBSD__
++#if defined(__FreeBSD__) || defined(__OpenBSD__)
+ #include <libusb.h>
+ #else
+ #include <libusb-1.0/libusb.h>

@@ -1,0 +1,12 @@
+Index: qt/OpenRGBHardwareIDsDialog/OpenRGBHardwareIDsDialog.cpp
+--- qt/OpenRGBHardwareIDsDialog/OpenRGBHardwareIDsDialog.cpp.orig
++++ qt/OpenRGBHardwareIDsDialog/OpenRGBHardwareIDsDialog.cpp
+@@ -6,7 +6,7 @@
+ #include <QString>
+ #include <QClipboard>
+ 
+-#ifdef __FreeBSD__
++#if defined(__FreeBSD__) || defined(__OpenBSD__)
+ #include <libusb.h>
+ #else
+ #include <libusb-1.0/libusb.h>

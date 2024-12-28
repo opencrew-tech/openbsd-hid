@@ -1,0 +1,16 @@
+Index: lib/kaitai/kaitai/kaitaistream.cpp
+--- lib/kaitai/kaitai/kaitaistream.cpp.orig
++++ lib/kaitai/kaitai/kaitaistream.cpp
+@@ -27,7 +27,11 @@
+ #define __BYTE_ORDER    BYTE_ORDER
+ #define __BIG_ENDIAN    BIG_ENDIAN
+ #define __LITTLE_ENDIAN LITTLE_ENDIAN
+-#else // !__APPLE__ or !_MSC_VER or !__QNX__
++#elif defined(__OpenBSD__)
++#define bswap_16(x) swap16(x)
++#define bswap_32(x) swap32(x)
++#define bswap_64(x) swap64(x)
++#else // !__APPLE__ or !_MSC_VER or !__OpenBSD__ or !__QNX__
+ #include <endian.h>
+ #include <byteswap.h>
+ #endif

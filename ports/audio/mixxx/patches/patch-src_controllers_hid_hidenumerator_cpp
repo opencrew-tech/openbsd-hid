@@ -1,0 +1,11 @@
+Index: src/controllers/hid/hidenumerator.cpp
+--- src/controllers/hid/hidenumerator.cpp.orig
++++ src/controllers/hid/hidenumerator.cpp
+@@ -91,6 +91,7 @@ QList<Controller*> HidEnumerator::queryDevices() {
+     qInfo() << "Scanning USB HID devices";
+ 
+     QStringList enumeratedDevices;
++    hidapi_hid_init();
+     hid_device_info* device_info_list = hid_enumerate(0x0, 0x0);
+     for (const auto* device_info = device_info_list;
+             device_info;

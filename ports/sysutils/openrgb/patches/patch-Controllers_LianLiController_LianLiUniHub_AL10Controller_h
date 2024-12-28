@@ -1,0 +1,12 @@
+Index: Controllers/LianLiController/LianLiUniHub_AL10Controller.h
+--- Controllers/LianLiController/LianLiUniHub_AL10Controller.h.orig
++++ Controllers/LianLiController/LianLiUniHub_AL10Controller.h
+@@ -16,7 +16,7 @@
+ 
+ #include "RGBController.h"
+ 
+-#include <libusb-1.0/libusb.h>
++#include <libusb.h>
+ 
+ /*----------------------------------------------------------------------------*\
+ | Global definitions.                                                          |

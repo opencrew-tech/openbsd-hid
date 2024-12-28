@@ -1,0 +1,7 @@
+@bin bin/openrgb
+share/applications/OpenRGB.desktop
+share/icons/hicolor/128x128/apps/OpenRGB.png
+share/metainfo/
+share/metainfo/org.openrgb.OpenRGB.metainfo.xml
+@tag update-desktop-database
+@tag gtk-update-icon-cache %D/share/icons/hicolor

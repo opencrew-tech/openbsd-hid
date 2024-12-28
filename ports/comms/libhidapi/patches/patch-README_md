@@ -1,0 +1,14 @@
+rename hid_init() to hidapi_hid_init() to avoid collision with usbhid
+
+Index: README.md
+--- README.md.orig
++++ README.md
+@@ -113,7 +113,7 @@ int main(int argc, char* argv[])
+ 	int i;
+ 
+ 	// Initialize the hidapi library
+-	res = hid_init();
++	res = hidapi_hid_init();
+ 
+ 	// Open the device using the VID, PID,
+ 	// and optionally the Serial number.

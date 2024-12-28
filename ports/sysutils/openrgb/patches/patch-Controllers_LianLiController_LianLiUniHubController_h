@@ -1,0 +1,12 @@
+Index: Controllers/LianLiController/LianLiUniHubController.h
+--- Controllers/LianLiController/LianLiUniHubController.h.orig
++++ Controllers/LianLiController/LianLiUniHubController.h
+@@ -15,7 +15,7 @@
+ 
+ #include "RGBController.h"
+ 
+-#ifdef __FreeBSD__
++#if defined(__FreeBSD__) || defined(__OpenBSD__)
+ #include <libusb.h>
+ #else
+ #include <libusb-1.0/libusb.h>

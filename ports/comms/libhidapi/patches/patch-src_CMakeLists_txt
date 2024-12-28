@@ -1,0 +1,22 @@
+Index: src/CMakeLists.txt
+--- src/CMakeLists.txt.orig
++++ src/CMakeLists.txt
+@@ -140,6 +140,18 @@ else()
+                 set(HIDAPI_NEED_EXPORT_LIBUDEV TRUE)
+             endif()
+         endif()
++    elseif(CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
++        if(NOT DEFINED HIDAPI_WITH_OPENBSD)
++            set(HIDAPI_WITH_OPENBSD ON)
++        endif()
++        if(HIDAPI_WITH_OPENBSD)
++            add_subdirectory("${PROJECT_ROOT}/openbsd" openbsd)
++            list(APPEND EXPORT_COMPONENTS openbsd)
++            set(EXPORT_ALIAS openbsd)
++            if(NOT BUILD_SHARED_LIBS)
++                set(HIDAPI_NEED_EXPORT_THREADS TRUE)
++            endif()
++        endif()
+     else()
+         set(HIDAPI_WITH_LIBUSB ON)
+     endif()

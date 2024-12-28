@@ -1,0 +1,212 @@
+Add and use a ring buffer for input reports.
+
+The existing b_to_q and q_to_b mechanisms are inadequate for our 
+needs and instead, spltty() is used.
+
+This change introduces a breaking change to the API, with the 
+following behavior:
+
+ * If the data read is less than the input report size, 
+   the excess is discarded
+ * If the data read exceeds the input report size, 
+   it is capped to the report size
+
+This modification is required by some applications that:
+
+ 1. Perform an initial n = read(big_size) 
+    to determine the input report size
+ 2. Adjust future reads based on the obtained size, 
+    as they avoid parsing the report descriptors
+
+The current API is also considered awkward and non-intuitive, 
+which led to this change.
+
+Index: sys/dev/usb/uhid.c
+===================================================================
+RCS file: /cvs/src/sys/dev/usb/uhid.c,v
+diff -u -p -u -p -r1.91 uhid.c
+--- sys/dev/usb/uhid.c	23 May 2024 03:21:09 -0000	1.91
++++ sys/dev/usb/uhid.c	28 Dec 2024 17:03:09 -0000
+@@ -151,7 +151,7 @@ uhid_detach(struct device *self, int fla
+ 		s = splusb();
+ 		if (--sc->sc_refcnt >= 0) {
+ 			/* Wake everyone */
+-			wakeup(&sc->sc_q);
++			wakeup(&sc->sc_ring);
+ 			/* Wait for processes to go away. */
+ 			usb_detach_wait(&sc->sc_hdev.sc_dev);
+ 		}
+@@ -190,12 +190,25 @@ uhid_intr(struct uhidev *addr, void *dat
+ 	}
+ #endif
+ 
+-	(void)b_to_q(data, len, &sc->sc_q);
++	if (len != sc->sc_hdev.sc_isize) {
++		printf("%s(uhid_intr): wrong intr len %d, expected %d\n",
++		    sc->sc_hdev.sc_dev.dv_xname, len, sc->sc_hdev.sc_isize);
++		return;
++	}
++	if (sc->sc_ring.count == UHID_RING_SIZE) {
++		DPRINTF(("uhid_intr: ring full, drop input\n"));
++		return;
++	}
++	(void)memcpy(sc->sc_ring.write, data, len);
++	sc->sc_ring.write += sc->sc_hdev.sc_isize;
++	if (sc->sc_ring.write == sc->sc_ring.end)
++		sc->sc_ring.write = sc->sc_ring.buf;
++	sc->sc_ring.count++;
+ 
+ 	if (sc->sc_state & UHID_ASLP) {
+ 		sc->sc_state &= ~UHID_ASLP;
+-		DPRINTFN(5, ("uhid_intr: waking %p\n", &sc->sc_q));
+-		wakeup(&sc->sc_q);
++		DPRINTFN(5, ("uhid_intr: waking %p\n", &sc->sc_ring));
++		wakeup(&sc->sc_ring);
+ 	}
+ 	selwakeup(&sc->sc_rsel);
+ }
+@@ -223,14 +236,20 @@ uhid_do_open(dev_t dev, int flag, int mo
+ 	if (sc->sc_hdev.sc_state & UHIDEV_OPEN)
+ 		return (EBUSY);
+ 
+-	clalloc(&sc->sc_q, UHID_BSIZE, 0);
++	sc->sc_ring.buf = malloc(sc->sc_hdev.sc_isize*UHID_RING_SIZE,
++	    M_USBDEV, M_WAITOK);
++	sc->sc_ring.read = sc->sc_ring.write = sc->sc_ring.buf;
++	sc->sc_ring.end = sc->sc_ring.buf + sc->sc_hdev.sc_isize*UHID_RING_SIZE;
++	sc->sc_ring.count = 0;
+ 
+ 	error = uhidev_open(&sc->sc_hdev);
+ 	if (error) {
+-		clfree(&sc->sc_q);
++		free(sc->sc_ring.buf, M_USBDEV,
++		    sc->sc_hdev.sc_isize*UHID_RING_SIZE);
+ 		return (error);
+ 	}
+ 
++	sc->sc_ibuf = malloc(sc->sc_hdev.sc_isize, M_USBDEV, M_WAITOK);
+ 	sc->sc_obuf = malloc(sc->sc_hdev.sc_osize, M_USBDEV, M_WAITOK);
+ 
+ 	return (0);
+@@ -246,7 +265,8 @@ uhidclose(dev_t dev, int flag, int mode,
+ 
+ 	DPRINTF(("uhidclose: sc=%p\n", sc));
+ 
+-	clfree(&sc->sc_q);
++	free(sc->sc_ring.buf, M_USBDEV, sc->sc_hdev.sc_isize*UHID_RING_SIZE);
++	free(sc->sc_ibuf, M_USBDEV, sc->sc_hdev.sc_isize);
+ 	free(sc->sc_obuf, M_USBDEV, sc->sc_hdev.sc_osize);
+ 	uhidev_close(&sc->sc_hdev);
+ 
+@@ -256,47 +276,38 @@ uhidclose(dev_t dev, int flag, int mode,
+ int
+ uhid_do_read(struct uhid_softc *sc, struct uio *uio, int flag)
+ {
+-	int s;
+-	int error = 0;
++	int s, error;
+ 	size_t length;
+-	u_char buffer[UHID_CHUNK];
+ 
+ 	DPRINTFN(1, ("uhidread\n"));
+ 
+ 	s = splusb();
+-	while (sc->sc_q.c_cc == 0) {
++	while (sc->sc_ring.count == 0) {
+ 		if (flag & IO_NDELAY) {
+ 			splx(s);
+ 			return (EWOULDBLOCK);
+ 		}
+ 		sc->sc_state |= UHID_ASLP;
+-		DPRINTFN(5, ("uhidread: sleep on %p\n", &sc->sc_q));
+-		error = tsleep_nsec(&sc->sc_q, PZERO|PCATCH, "uhidrea", INFSLP);
++		DPRINTFN(5, ("uhidread: sleep on %p\n", &sc->sc_ring));
++		error = tsleep_nsec(&sc->sc_ring, PZERO|PCATCH, "uhidrea",
++		    INFSLP);
+ 		DPRINTFN(5, ("uhidread: woke, error=%d\n", error));
+ 		if (usbd_is_dying(sc->sc_hdev.sc_udev))
+ 			error = EIO;
+ 		if (error) {
+ 			sc->sc_state &= ~UHID_ASLP;
+-			break;
++			splx(s);
++			return (error);
+ 		}
+ 	}
++	(void)memcpy(sc->sc_ibuf, sc->sc_ring.read, sc->sc_hdev.sc_isize);
++	sc->sc_ring.read += sc->sc_hdev.sc_isize;
++	if (sc->sc_ring.read == sc->sc_ring.end)
++		sc->sc_ring.read = sc->sc_ring.buf;
++	sc->sc_ring.count--;
+ 	splx(s);
+-
+-	/* Transfer as many chunks as possible. */
+-	while (sc->sc_q.c_cc > 0 && uio->uio_resid > 0 && !error) {
+-		length = ulmin(sc->sc_q.c_cc, uio->uio_resid);
+-		if (length > sizeof(buffer))
+-			length = sizeof(buffer);
+-
+-		/* Remove a small chunk from the input queue. */
+-		(void) q_to_b(&sc->sc_q, buffer, length);
+-		DPRINTFN(5, ("uhidread: got %zu chars\n", length));
+-
+-		/* Copy the data to the user process. */
+-		if ((error = uiomove(buffer, length, uio)) != 0)
+-			break;
+-	}
+-
++	length = ulmin(sc->sc_hdev.sc_isize, uio->uio_resid);
++	error = uiomove(sc->sc_ibuf, length, uio);
+ 	return (error);
+ }
+ 
+@@ -388,6 +399,7 @@ uhid_do_ioctl(struct uhid_softc *sc, u_l
+ 	case USB_GET_REPORT:
+ 	case USB_SET_REPORT:
+ 	case USB_GET_REPORT_ID:
++	case USB_GET_INTERFACE_ID:
+ 	default:
+ 		rc = uhidev_ioctl(&sc->sc_hdev, cmd, addr, flag, p);
+ 		if (rc == -1)
+@@ -433,7 +445,7 @@ filt_uhidread(struct knote *kn, long hin
+ {
+ 	struct uhid_softc *sc = (void *)kn->kn_hook;
+ 
+-	kn->kn_data = sc->sc_q.c_cc;
++	kn->kn_data = sc->sc_ring.count;
+ 	return (kn->kn_data > 0);
+ }
+ 
+Index: sys/dev/usb/uhid.h
+===================================================================
+RCS file: /cvs/src/sys/dev/usb/uhid.h,v
+diff -u -p -u -p -r1.2 uhid.h
+--- sys/dev/usb/uhid.h	23 Jan 2021 05:08:36 -0000	1.2
++++ sys/dev/usb/uhid.h	28 Dec 2024 17:03:10 -0000
+@@ -33,12 +33,24 @@
+ 
+ #ifdef _KERNEL
+ 
++/* Simple ring buffer, must be aligned on sc_isize per device */
++struct uhid_ring {
++	u_char	*buf;		/* buffer of inputs */
++	int	 count;		/* number of inputs in buffer */
++	u_char	*read;		/* next input to read */
++	u_char	*write;		/* next input to insert */
++	u_char	*end;		/* end of buffer */
++};
++#define UHID_RING_SIZE 100	/* max number of inputs in ring */
++
+ struct uhid_softc {
+ 	struct uhidev sc_hdev;
+ 
+ 	u_char *sc_obuf;
++	u_char *sc_ibuf;
++
++	struct uhid_ring sc_ring;
+ 
+-	struct clist sc_q;
+ 	struct selinfo sc_rsel;
+ 	u_char sc_state;		/* driver state */
+ #define	UHID_ASLP	0x01		/* waiting for device data */
+

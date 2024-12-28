@@ -21,6 +21,13 @@ This modification is required by some applications that:
 The current API is also considered awkward and non-intuitive, 
 which led to this change.
 
+This ring implementation doesn't allow shorter input from usb stack.
+Depending on device needs, there are different ways to address it :
+
+ * drop short input and log <= what this diff does
+ * fill the ring with NULL up to sc_isize (userland won't know)
+ * record input length either inside the ring or close to it
+
 Index: sys/dev/usb/uhid.c
 ===================================================================
 RCS file: /cvs/src/sys/dev/usb/uhid.c,v

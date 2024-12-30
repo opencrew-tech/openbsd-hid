@@ -37,7 +37,7 @@
 
 #include "hidapi.h"
 
-#define HIDAPI_MAX_CHILD_DEVICES 256
+#define UHID_MAX_DEVICES 64
 #define UHID_MAX_REPORTS 256
 
 struct hid_device_ {
@@ -597,7 +597,7 @@ struct hid_device_info HID_API_EXPORT * HID_API_CALL hid_enumerate(
 	hed.root = NULL;
 	hed.end = NULL;
 
-	for (i=0; i < HIDAPI_MAX_CHILD_DEVICES; i++) {
+	for (i=0; i < UHID_MAX_DEVICES; i++) {
 		asprintf(&devpath, "/dev/uhid%d", i);
 		uhid = open(devpath, O_RDONLY | O_CLOEXEC);
 		if (uhid < 0) {
@@ -761,7 +761,7 @@ HID_API_EXPORT hid_device * HID_API_CALL hid_open_path(const char *path)
 	}
 	close(uhid);
 
-	for (i = 0; i < HIDAPI_MAX_CHILD_DEVICES; i++) {
+	for (i = 0; i < UHID_MAX_DEVICES; i++) {
 		asprintf(&child_dev, "/dev/uhid%d", i);
 
 		uhid = open(child_dev, O_RDWR | O_CLOEXEC);

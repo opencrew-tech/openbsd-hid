@@ -609,7 +609,7 @@ struct hid_device_info HID_API_EXPORT * HID_API_CALL hid_enumerate(
 			register_global_error_format(
 		    		"%s: ioctl(USB_GET_DEVICEINFO): %s", devpath,
 				strerror(errno)
-			)
+			);
 			close(uhid);
 			continue;
 		}
@@ -617,7 +617,7 @@ struct hid_device_info HID_API_EXPORT * HID_API_CALL hid_enumerate(
 			register_global_error_format(
 		    		"%s: ioctl(USB_GET_INTERFACE_ID): %s", devpath,
 				strerror(errno)
-			)
+			);
 			close(uhid);
 			continue;
 		}
@@ -771,14 +771,14 @@ HID_API_EXPORT hid_device * HID_API_CALL hid_open_path(const char *path)
 
 		if (ioctl(uhid, USB_GET_DEVICEINFO, &udi) == -1) {
 			register_global_error_format(
-		    		"%s: ioctl(USB_GET_DEVICEINFO): %s", devpath,
+				"%s: ioctl(USB_GET_DEVICEINFO): %s", path,
 				strerror(errno));
 			close(uhid);
 			continue;
 		}
 		if(ioctl(uhid, USB_GET_INTERFACE_ID, &ifaceno) == -1) {
 			register_global_error_format(
-		    		"%s: ioctl(USB_GET_INTERFACE_ID): %s", devpath,
+				"%s: ioctl(USB_GET_INTERFACE_ID): %s", path,
 				strerror(errno));
 			close(uhid);
 			continue;
@@ -876,7 +876,6 @@ int HID_API_EXPORT HID_API_CALL hid_read_timeout(hid_device *dev,
 		return 0;
 	}
 
-	reportid = *data;
 	for (i = 0; i < dev->poll_handles_length; i++) {
 		ph = &dev->poll_handles[i];
 

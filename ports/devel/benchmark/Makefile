@@ -14,7 +14,7 @@ COMPILER =		base-clang ports-gcc base-gcc
 
 MODULES =		devel/cmake
 
-TEST_DEPENDS =		devel/gtest
+BUILD_DEPENDS =		devel/gtest
 
 CONFIGURE_ARGS+=	-DBENCHMARK_USE_BUNDLED_GTEST=OFF
 

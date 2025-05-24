@@ -1,7 +1,6 @@
 COMMENT =	microbenchmark support library
 
-V=1.9.1
-DIST_TUPLE =	github google benchmark v${V} .
+DIST_TUPLE =	github google benchmark v1.9.4 .
 
 CATEGORIES =	devel
 

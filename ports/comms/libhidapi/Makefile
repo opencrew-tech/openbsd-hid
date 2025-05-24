@@ -3,16 +3,14 @@ COMMENT =	library for communicating with USB and Bluetooth HID devices
 # XXX Any consumer should be patched to use hidapi_hid_init() instead of
 # hid_init(3) to avoid conflict with base usbhid(3).
 
-V =		0.14.0
-DISTNAME =	libhidapi-${V}
+V =		0.15.0
+PKGNAME =	libhidapi-${V}
 
-GH_ACCOUNT =	libusb
-GH_PROJECT =	hidapi
-GH_TAGNAME =	hidapi-${V}
+DIST_TUPLE =	github libusb hidapi hidapi-${V} .
 
-SHARED_LIBS +=	hidapi-libusb		1.0 # 0.0
-SHARED_LIBS +=	hidapi-openbsd		1.0 # 0.0
-SHARED_LIBS +=	hidapi			1.0 # 0.0
+SHARED_LIBS +=	hidapi-libusb		1.1 # 0.0
+SHARED_LIBS +=	hidapi-openbsd		1.1 # 0.0
+SHARED_LIBS +=	hidapi			1.1 # 0.0
 
 CATEGORIES =	comms
 

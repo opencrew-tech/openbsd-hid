@@ -6,7 +6,7 @@ include/djinterop/database.hpp
 include/djinterop/djinterop.hpp
 include/djinterop/engine/
 include/djinterop/engine/engine.hpp
-include/djinterop/engine/engine_version.hpp
+include/djinterop/engine/engine_schema.hpp
 include/djinterop/engine/v2/
 include/djinterop/engine/v2/beat_data_blob.hpp
 include/djinterop/engine/v2/change_log_table.hpp
@@ -19,6 +19,17 @@ include/djinterop/engine/v2/playlist_table.hpp
 include/djinterop/engine/v2/quick_cues_blob.hpp
 include/djinterop/engine/v2/track_data_blob.hpp
 include/djinterop/engine/v2/track_table.hpp
+include/djinterop/engine/v3/
+include/djinterop/engine/v3/beat_data_blob.hpp
+include/djinterop/engine/v3/engine_library.hpp
+include/djinterop/engine/v3/information_table.hpp
+include/djinterop/engine/v3/loops_blob.hpp
+include/djinterop/engine/v3/overview_waveform_data_blob.hpp
+include/djinterop/engine/v3/playlist_entity_table.hpp
+include/djinterop/engine/v3/playlist_table.hpp
+include/djinterop/engine/v3/quick_cues_blob.hpp
+include/djinterop/engine/v3/track_data_blob.hpp
+include/djinterop/engine/v3/track_table.hpp
 include/djinterop/exceptions.hpp
 include/djinterop/musical_key.hpp
 include/djinterop/pad_color.hpp

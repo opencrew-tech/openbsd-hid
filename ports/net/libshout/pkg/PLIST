@@ -1,0 +1,18 @@
+@bin bin/shout
+include/shout/
+include/shout/shout.h
+@comment lib/ckport/
+@comment lib/ckport/db/
+@comment lib/ckport/db/libshout.ckport
+@static-lib lib/libshout.a
+lib/libshout.la
+@lib lib/libshout.so.${LIBshout_VERSION}
+lib/pkgconfig/shout.pc
+@man man/man1/shout.1
+share/aclocal/shout.m4
+share/examples/libshout/
+@comment share/examples/libshout/COPYING
+@comment share/examples/libshout/NEWS
+@comment share/examples/libshout/README
+share/examples/libshout/example.c
+share/examples/libshout/nonblocking.c

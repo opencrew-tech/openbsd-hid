@@ -1,0 +1,6 @@
+Libshout is a library for communicating with and sending data to a media
+streaming server like Icecast.
+
+It supports different streaming formats, such as HTTP, ICY, and
+RoarAudio, with optional TLS. Various media formats for both audio and
+video are supported as well, such as Ogg, MP3, WebM, and Matroska.

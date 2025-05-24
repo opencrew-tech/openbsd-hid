@@ -48,7 +48,9 @@ share/mixxx/controllers/Behringer-CMDStudio4a-scripts.js
 share/mixxx/controllers/Behringer-DDM4000-scripts.js
 share/mixxx/controllers/Behringer-Extension-scripts.js
 share/mixxx/controllers/CueColorsReference.svg
+share/mixxx/controllers/DJ TechTools MIDI Fighter Spectra.midi.xml
 share/mixxx/controllers/DJ TechTools MIDI Fighter Twister.midi.xml
+share/mixxx/controllers/DJ TechTools-MIDI Fighter Spectra-scripts.js
 share/mixxx/controllers/DJ TechTools-MIDI Fighter Twister-scripts.js
 share/mixxx/controllers/DJ-Tech CDJ-101.midi.xml
 share/mixxx/controllers/DJ-Tech DJM-101.midi.xml
@@ -124,12 +126,14 @@ share/mixxx/controllers/Hercules-DJ-Control-Steel-scripts.js
 share/mixxx/controllers/Hercules-DJControl-Compact-scripts.js
 share/mixxx/controllers/Hercules-DJControl-Inpulse-200-script.js
 share/mixxx/controllers/Hercules-DJControl-Inpulse-300-script.js
+share/mixxx/controllers/Hercules-DJControl-Inpulse-500-script.js
 share/mixxx/controllers/Hercules-DJControl-MIX-scripts.js
 share/mixxx/controllers/Hercules-DJControl-Starlight-scripts.js
 share/mixxx/controllers/Hercules-P32-scripts.js
 share/mixxx/controllers/Hercules-mp3e2-compat.js
 share/mixxx/controllers/Hercules_DJControl_Inpulse_200.midi.xml
 share/mixxx/controllers/Hercules_DJControl_Inpulse_300.midi.xml
+share/mixxx/controllers/Hercules_DJControl_Inpulse_500.midi.xml
 share/mixxx/controllers/Hercules_DJControl_Jogvision-scripts.js
 share/mixxx/controllers/Hercules_DJControl_Jogvision.midi.xml
 share/mixxx/controllers/Intech TEK2.midi.xml
@@ -150,6 +154,10 @@ share/mixxx/controllers/Korg-KAOSS-DJ.midi.xml
 share/mixxx/controllers/Korg-nanoKONTROL-2-scripts.js
 share/mixxx/controllers/Korg-nanoPAD2-scripts.js
 share/mixxx/controllers/M-Audio_Xsession_pro.midi.xml
+share/mixxx/controllers/MVave-SMC-Mixer-scripts.js
+share/mixxx/controllers/MVave-SMC-Mixer.midi.xml
+share/mixxx/controllers/MVave-SMK-25-II-scripts.js
+share/mixxx/controllers/MVave-SMK-25-II.midi.xml
 share/mixxx/controllers/Midi-Keyboard.midi.xml
 share/mixxx/controllers/MidiTech-MidiControl.midi.xml
 share/mixxx/controllers/Midi_for_light-scripts.js
@@ -177,10 +185,12 @@ share/mixxx/controllers/Novation-Launchpad-scripts.js
 share/mixxx/controllers/Numark DJ2Go.midi.xml
 share/mixxx/controllers/Numark MIXTRACK.midi.xml
 share/mixxx/controllers/Numark Mixtrack 2.midi.xml
+share/mixxx/controllers/Numark Mixtrack Platinum FX.midi.xml
 share/mixxx/controllers/Numark Mixtrack Platinum.midi.xml
 share/mixxx/controllers/Numark Mixtrack Pro FX.midi.xml
 share/mixxx/controllers/Numark Mixtrack Pro.midi.xml
 share/mixxx/controllers/Numark N4.midi.xml
+share/mixxx/controllers/Numark NS6II.midi.xml
 share/mixxx/controllers/Numark NS7.midi.xml
 share/mixxx/controllers/Numark Omni Control.midi.xml
 share/mixxx/controllers/Numark Total Control.midi.xml
@@ -191,10 +201,12 @@ share/mixxx/controllers/Numark-MixTrack-scripts.js
 share/mixxx/controllers/Numark-Mixtrack-2-scripts.js
 share/mixxx/controllers/Numark-Mixtrack-3-scripts.js
 share/mixxx/controllers/Numark-Mixtrack-3.midi.xml
+share/mixxx/controllers/Numark-Mixtrack-Platinum-FX-scripts.js
 share/mixxx/controllers/Numark-Mixtrack-Platinum-scripts.js
 share/mixxx/controllers/Numark-Mixtrack-Pro-FX-scripts.js
 share/mixxx/controllers/Numark-Mixtrack-Pro-scripts.js
 share/mixxx/controllers/Numark-N4-scripts.js
+share/mixxx/controllers/Numark-NS6II-scripts.js
 share/mixxx/controllers/Numark-NS7-scripts.js
 share/mixxx/controllers/Numark-Omni-Control-scripts.js
 share/mixxx/controllers/Numark-Party-Mix.midi.xml
@@ -238,6 +250,8 @@ share/mixxx/controllers/Reloop Terminal Mix 2-4.js
 share/mixxx/controllers/Reloop Terminal Mix 2-4.midi.xml
 share/mixxx/controllers/Reloop-Beatmix-2-4-scripts.js
 share/mixxx/controllers/Reloop-Beatpad-scripts.js
+share/mixxx/controllers/Reloop-Digital-Jockey-2-IE.midi.xml
+share/mixxx/controllers/Reloop-Digital-Jockey-2-IE.scripts.js
 share/mixxx/controllers/Reloop-Digital-Jockey2-Controller-scripts.js
 share/mixxx/controllers/Reloop-Jockey-3-ME-scripts.js
 share/mixxx/controllers/Reloop-Mixage.midi.xml

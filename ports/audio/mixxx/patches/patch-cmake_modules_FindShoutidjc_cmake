@@ -1,0 +1,24 @@
+Index: cmake/modules/FindShoutidjc.cmake
+--- cmake/modules/FindShoutidjc.cmake.orig
++++ cmake/modules/FindShoutidjc.cmake
+@@ -42,17 +42,17 @@ The following cache variables may also be set:
+ 
+ find_package(PkgConfig QUIET)
+ if(PkgConfig_FOUND)
+-  pkg_check_modules(PC_Shoutidjc QUIET shout-idjc)
++  pkg_check_modules(PC_Shoutidjc QUIET shout)
+ endif()
+ 
+ find_path(Shoutidjc_INCLUDE_DIR
+-  NAMES shoutidjc/shout.h
++  NAMES shout/shout.h
+   HINTS ${PC_Shout_INCLUDE_DIRS}
+   DOC "Shout include directory")
+ mark_as_advanced(Shoutidjc_INCLUDE_DIR)
+ 
+ find_library(Shoutidjc_LIBRARY
+-  NAMES shout-idjc
++  NAMES shout
+   HINTS ${PC_Shoutidjc_LIBRARY_DIRS}
+   DOC "Shoutidjc library"
+ )

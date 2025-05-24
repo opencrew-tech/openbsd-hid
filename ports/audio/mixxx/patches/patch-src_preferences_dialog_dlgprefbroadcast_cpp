@@ -1,0 +1,12 @@
+Index: src/preferences/dialog/dlgprefbroadcast.cpp
+--- src/preferences/dialog/dlgprefbroadcast.cpp.orig
++++ src/preferences/dialog/dlgprefbroadcast.cpp
+@@ -6,7 +6,7 @@
+ #include <QtDebug>
+ 
+ // this is needed to define SHOUT_META_* macros used in version guard
+-#include <shoutidjc/shout.h>
++#include <shout/shout.h>
+ 
+ #include "broadcast/defs_broadcast.h"
+ #include "control/controlproxy.h"

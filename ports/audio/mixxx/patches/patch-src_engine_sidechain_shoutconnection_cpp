@@ -1,0 +1,12 @@
+Index: src/engine/sidechain/shoutconnection.cpp
+--- src/engine/sidechain/shoutconnection.cpp.orig
++++ src/engine/sidechain/shoutconnection.cpp
+@@ -10,7 +10,7 @@
+ #include <unistd.h>
+ #endif
+ 
+-#include <shoutidjc/shout.h>
++#include <shout/shout.h>
+ 
+ #include "broadcast/defs_broadcast.h"
+ #include "encoder/encoder.h"

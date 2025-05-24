@@ -1,0 +1,12 @@
+Index: src/util/versionstore.cpp
+--- src/util/versionstore.cpp.orig
++++ src/util/versionstore.cpp
+@@ -6,7 +6,7 @@
+ #include <QtGlobal>
+ 
+ #ifdef __BROADCAST__
+-#include <shoutidjc/shout.h>
++#include <shout/shout.h>
+ #endif
+ 
+ #ifdef __RUBBERBAND__

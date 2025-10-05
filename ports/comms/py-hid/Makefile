@@ -1,6 +1,6 @@
 COMMENT=	Ctypes bindings to comms/hidapi
 
-MODPY_DISTV=	1.0.7
+MODPY_DISTV=	1.0.8
 DISTNAME=	hid-${MODPY_DISTV}
 PKGNAME=	py-${DISTNAME}
 

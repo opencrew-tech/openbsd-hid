@@ -29,6 +29,8 @@ share/mixxx/controllers/American Audio VMS4.midi.xml
 share/mixxx/controllers/American-Audio-RADIUS-2000-scripts.js
 share/mixxx/controllers/American-Audio-VMS2-scripts.js
 share/mixxx/controllers/American-Audio-VMS4-scripts.js
+share/mixxx/controllers/Arturia-KeyLab-Mk1-scripts.js
+share/mixxx/controllers/ArturiaKeyLab.midi.xml
 share/mixxx/controllers/Behringer BCD2000.midi.xml
 share/mixxx/controllers/Behringer BCD3000 Advanced.midi.xml
 share/mixxx/controllers/Behringer BCD3000.midi.xml
@@ -136,6 +138,10 @@ share/mixxx/controllers/Hercules_DJControl_Inpulse_300.midi.xml
 share/mixxx/controllers/Hercules_DJControl_Inpulse_500.midi.xml
 share/mixxx/controllers/Hercules_DJControl_Jogvision-scripts.js
 share/mixxx/controllers/Hercules_DJControl_Jogvision.midi.xml
+share/mixxx/controllers/Icon-P1Nano-scripts.js
+share/mixxx/controllers/Icon-P1Nano.midi.xml
+share/mixxx/controllers/Icon-iControls-scripts.js
+share/mixxx/controllers/Icon-iControls.midi.xml
 share/mixxx/controllers/Intech TEK2.midi.xml
 share/mixxx/controllers/Intech TEK2.scripts.js
 share/mixxx/controllers/Ion Discover DJ.midi.xml
@@ -577,6 +583,8 @@ share/mixxx/skins/Deere/icon/ic_library_checkmark_orange.svg
 share/mixxx/skins/Deere/icon/ic_library_preview_pause.svg
 share/mixxx/skins/Deere/icon/ic_library_preview_play.svg
 share/mixxx/skins/Deere/icon/ic_loop_48px.svg
+share/mixxx/skins/Deere/icon/ic_loop_anchor_end.svg
+share/mixxx/skins/Deere/icon/ic_loop_anchor_start.svg
 share/mixxx/skins/Deere/icon/ic_loop_in_48px.svg
 share/mixxx/skins/Deere/icon/ic_loop_move_backward_48px.svg
 share/mixxx/skins/Deere/icon/ic_loop_move_forward_48px.svg
@@ -1809,6 +1817,10 @@ share/mixxx/skins/Shade/btn/btn_lib_sort_up_pink.png
 share/mixxx/skins/Shade/btn/btn_lib_spinbox_down_white.svg
 share/mixxx/skins/Shade/btn/btn_lib_spinbox_up_white.svg
 share/mixxx/skins/Shade/btn/btn_load.png
+share/mixxx/skins/Shade/btn/btn_loop_anchor_end.png
+share/mixxx/skins/Shade/btn/btn_loop_anchor_end_overdown.png
+share/mixxx/skins/Shade/btn/btn_loop_anchor_start.png
+share/mixxx/skins/Shade/btn/btn_loop_anchor_start_overdown.png
 share/mixxx/skins/Shade/btn/btn_loop_in.png
 share/mixxx/skins/Shade/btn/btn_loop_in_down.png
 share/mixxx/skins/Shade/btn/btn_loop_in_over.png
@@ -2451,6 +2463,8 @@ share/mixxx/skins/Tango/buttons/btn_lib_radio_button_on.svg
 share/mixxx/skins/Tango/buttons/btn_lib_spinbox_down_white.svg
 share/mixxx/skins/Tango/buttons/btn_lib_spinbox_up_white.svg
 share/mixxx/skins/Tango/buttons/btn_loop.svg
+share/mixxx/skins/Tango/buttons/btn_loop_anchor_end.svg
+share/mixxx/skins/Tango/buttons/btn_loop_anchor_start.svg
 share/mixxx/skins/Tango/buttons/btn_loop_beatjump_off.svg
 share/mixxx/skins/Tango/buttons/btn_loop_beatjump_on.svg
 share/mixxx/skins/Tango/buttons/btn_loop_beatjump_on_black.svg

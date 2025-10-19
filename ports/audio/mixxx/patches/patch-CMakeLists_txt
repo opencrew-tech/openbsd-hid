@@ -1,0 +1,12 @@
+Index: CMakeLists.txt
+--- CMakeLists.txt.orig
++++ CMakeLists.txt
+@@ -2433,7 +2433,7 @@ option(ENGINEPRIME "Support for library export to Deno
+ if(ENGINEPRIME)
+   # libdjinterop does not currently have a stable ABI, so we fetch sources for a specific tag, build here, and link
+   # statically.  This situation should be reviewed once libdjinterop hits version 1.x.
+-  set(LIBDJINTEROP_VERSION 0.24.3)
++  set(LIBDJINTEROP_VERSION 0.26.1)
+   # Look whether an existing installation of libdjinterop matches the required version.
+   find_package(DjInterop  ${LIBDJINTEROP_VERSION} EXACT CONFIG)
+   if(NOT DjInterop_FOUND)

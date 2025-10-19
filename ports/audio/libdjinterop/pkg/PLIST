@@ -5,6 +5,7 @@ include/djinterop/crate.hpp
 include/djinterop/database.hpp
 include/djinterop/djinterop.hpp
 include/djinterop/engine/
+include/djinterop/engine/base_engine_library.hpp
 include/djinterop/engine/engine.hpp
 include/djinterop/engine/engine_schema.hpp
 include/djinterop/engine/v2/
@@ -34,6 +35,7 @@ include/djinterop/exceptions.hpp
 include/djinterop/musical_key.hpp
 include/djinterop/pad_color.hpp
 include/djinterop/performance_data.hpp
+include/djinterop/playlist.hpp
 include/djinterop/semantic_version.hpp
 include/djinterop/stream_helper.hpp
 include/djinterop/track.hpp

@@ -1,6 +1,6 @@
 COMMENT=	library for access to DJ record libraries
 
-DIST_TUPLE=	github xsco libdjinterop 0.24.3 .
+DIST_TUPLE=	github xsco libdjinterop 0.26.1 .
 
 SHARED_LIBS+=	djinterop 0.0
 
